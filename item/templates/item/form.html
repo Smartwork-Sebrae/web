@@ -9,14 +9,18 @@
 
         {% bootstrap_form form %}
 
-        {% buttons %}
-            <a class="btn btn-default" href="{% url 'item:list' %}">
-                <i class="material-icons">cancel</i> Cancelar
-            </a>
-            &nbsp;
-            <button type="submit" class="btn btn-primary">
-                <i class="material-icons">check</i> Salvar
-            </button>
+        {% buttons %}   
+            <div class="align-center">
+                <a class="btn btn-lg p-l-50 p-r-50 waves-effect btn-default" href="{% url 'item:list' %}">
+                    <i class="material-icons">cancel</i>
+                    Cancelar
+                </a>
+                &nbsp;
+                <button type="submit" class="btn btn-lg p-l-50 p-r-50 waves-effect bg-indigo">
+                    <i class="material-icons">check</i>
+                    Salvar
+                </button>
+            </div>
         {% endbuttons %}
     </form>
 {% endblock %}
