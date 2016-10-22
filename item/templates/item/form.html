@@ -7,7 +7,16 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% bootstrap_form form layout='inline' %}
-        {% buttons submit='OK' reset='Cancel' layout='inline' %}{% endbuttons %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <a class="btn btn-default" href="{% url 'item:list' %}">
+                <i class="material-icons">cancel</i> Cancelar
+            </a>
+            &nbsp;
+            <button type="submit" class="btn btn-primary">
+                <i class="material-icons">check</i> Salvar
+            </button>
+        {% endbuttons %}
     </form>
 {% endblock %}
