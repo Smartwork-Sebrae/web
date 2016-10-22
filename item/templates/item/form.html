@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+    {{ form.errors }}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_form form layout='inline' %}
+        {% buttons submit='OK' reset='Cancel' layout='inline' %}{% endbuttons %}
+    </form>
+{% endblock %}
