@@ -211,7 +211,7 @@ tinymce.PluginManager.add('template', function(editor) {
 		html = replaceTemplateValues(html, 'template_replace_values');
 		el = dom.create('div', null, html);
 
-		// Find template element within div
+		// Find templates element within div
 		n = dom.select('.mceTmpl', el);
 		if (n && n.length > 0) {
 			el = dom.create('div', null);

@@ -1084,14 +1084,14 @@ function renderPagination(wizard, options, state)
 }
 
 /**
- * Renders a template and replaces all placeholder.
+ * Renders a templates and replaces all placeholder.
  *
  * @static
  * @private
  * @method renderTemplate
- * @param template {String} A template
+ * @param template {String} A templates
  * @param substitutes {Object} A list of substitute
- * @return {String} The rendered template
+ * @return {String} The rendered templates
  */
 function renderTemplate(template, substitutes)
 {
@@ -1702,7 +1702,7 @@ var defaults = $.fn.steps.defaults = {
      */
 
     /**
-     * The title template which will be used to create a step button.
+     * The title templates which will be used to create a step button.
      *
      * @property titleTemplate
      * @type String
@@ -1712,7 +1712,7 @@ var defaults = $.fn.steps.defaults = {
     titleTemplate: "<span class=\"number\">#index#.</span> #title#",
 
     /**
-     * The loading template which will be used to create the loading animation.
+     * The loading templates which will be used to create the loading animation.
      *
      * @property loadingTemplate
      * @type String
