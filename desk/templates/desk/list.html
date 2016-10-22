@@ -1,0 +1,77 @@
+{% extends "core/base.html" %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="row clearfix">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'core:index' %}">
+                    <i class="material-icons">home</i> Início
+                </a>
+            </li>
+            <li class="active">
+                <i class="material-icons">work</i> Mesas
+            </li>
+        </ol>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        <span class="text-upper">Mesas</span>
+                        <a class="btn bg-indigo btn-sm pull-right" href="{% url 'desk:create' %}">
+                            <i class="material-icons">add</i>
+                            <span>Adicionar Mesa</span>
+                        </a>
+                        <small>
+                            {% with object_list.count as total %}
+                                {{ total }} mesa{{ total|pluralize }} adicionada{{ total|pluralize }}.
+                            {% endwith %}
+                        </small>
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Número</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in object_list %}
+                                <tr>
+                                    <td>{{ object.name }}</td>
+                                    <td>{{ object.number }}</td>
+                                    <td>{{ object.get_status_display }}</td>
+                                    <td>
+                                        <a class="btn btn-sm bg-cyan" href="{{ object.get_update_url }}">
+                                        <i class="material-icons">edit</i>
+                                            Atualizar
+                                        </a>
+                                        <a class="btn btn-sm bg-deep-orange" href="{{ object.get_delete_url }}">
+                                            <i class="material-icons">delete_forever</i>
+                                            Remover
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3">
+                                        Nenhuma Mesa encontrada.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

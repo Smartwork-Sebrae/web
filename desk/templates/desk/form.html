@@ -1,0 +1,80 @@
+{% extends "core/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="row clearfix">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'core:index' %}">
+                    <i class="material-icons">home</i> Início
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'desk:list' %}">
+                    <i class="material-icons">work</i> Mesas
+                </a>
+            </li>
+            {% if form.instance.pk %}
+                <li class="active">
+                    Alterar Mesa "{{ object.name }}"
+                </li>
+            {% else %}
+                <li class="active">
+                    Adicionar Mesa
+                </li>
+            {% endif %}
+        </ol>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header {% if form.instance.pk %}bg-cyan{% else %}bg-indigo{% endif %}">
+                    {% if form.instance.pk %}
+                        <h2 class="text-upper">Alterar Mesa "{{ object.name }}"</h2>
+                    {% else %}
+                        <h2 class="text-upper">Adicionar Mesa</h2>
+                    {% endif %}
+                    <small>You can use material design colors</small>
+                </div>
+                <div class="body table-responsive">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="input-group input-group-lg">
+                          {{ form.name.label_tag }}
+                          <div class="form-line">
+                            {% render_field form.name|add_class:'form-control' placeholder='Ex.: Mesa de Costura' autofocus='autofocus' %}
+                          </div>
+                        </div>
+
+                        <div class="input-group input-group-lg">
+                          {{ form.number.label_tag }}
+                          <div class="form-line">
+                            {% render_field form.number|add_class:'form-control' placeholder='Número Identificador' %}
+                          </div>
+                        </div>
+
+                        <div class="align-center p-t-10 p-b-30">
+                            <span>&#8226;</span>
+                        </div>
+
+                        <div class="input-group align-center">
+                            <a class="btn btn-lg p-l-50 p-r-50 waves-effect btn-default" href="{% url 'desk:list' %}">
+                                <i class="material-icons">cancel</i>
+                                Cancelar
+                            </a>
+                            &nbsp;
+                            <button type="submit" class="btn btn-lg p-l-50 p-r-50 waves-effect bg-indigo">
+                                <i class="material-icons">check</i>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Basic Table -->
+{% endblock %}

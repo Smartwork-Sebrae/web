@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class="row clearfix">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'core:index' %}">
+                    <i class="material-icons">home</i> Início
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'desk:list' %}">
+                    <i class="material-icons">work</i> Mesas
+                </a>
+            </li>
+            <li class="active">
+                Remover Mesa "{{ object.name }}"
+            </li>
+        </ol>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header bg-deep-orange">
+                    <h2>
+                        <span class="text-upper">Remover Mesa "{{ object.name }}"</span>
+                        <small>Basic example without any additional modification classes</small>
+                    </h2>
+                </div>
+                <div class="body">
+                    <h4 class="align-center">Tem certeza que deseja remover essa mesa?</h4>
+
+                    <div class="align-center p-t-20 p-b-30">
+                        <span>&#8226;</span>
+                    </div>
+
+                    <form method="POST">
+                      {% csrf_token %}
+                      <div class="align-center">
+                          <a class="btn btn-lg p-l-50 p-r-50 waves-effect btn-default" href="{% url 'desk:list' %}">
+                              <i class="material-icons">cancel</i>
+                              Cancelar
+                          </a>
+                          &nbsp;
+                          <button type="submit" class="btn btn-lg p-l-50 p-r-50 waves-effect bg-indigo">
+                              <i class="material-icons">check</i>
+                              Remover
+                          </button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     # Project Apps
     'core',
     'item',
+    'desk',
 )
 
 MIDDLEWARE_CLASSES = (
