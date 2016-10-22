@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class="block-header">
+        <h2>Itens</h2>
+    </div>
+    <!-- Basic Table -->
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        ITENS
+                        <small>Basic example without any additional modification classes</small>
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>Nome</th>
+                                <th>Tempo esperado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if object_list %}
+                            {% for object in object_list %}
+                                <tr>
+                                    <td>{{ object.name }}</td>
+                                    <td>{{ object.estimated_time }}</td>
+                                    <td><a href="#">Atualizar</a></td>
+                                    <td><a href="#">Remover</a></td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Basic Table -->
+{% endblock %}
