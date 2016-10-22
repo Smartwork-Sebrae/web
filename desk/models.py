@@ -22,6 +22,14 @@ class Desk(models.Model):
         _('Status'), max_length=20, choices=STATUS_CHOICES,
         default=CREATED, blank=True)
 
+    # relations
+    previous_desk = models.OneToOneField(
+        verbose_name='Mesa Anterior',
+        to='self', null=True, blank=True, related_name='next')
+    next_desk = models.OneToOneField(
+        verbose_name='Mesa Seguinte',
+        to='self', null=True, blank=True, related_name='previous')
+
     class Meta:
         verbose_name = _(u'Desk')
         verbose_name_plural = _(u'Desks')
@@ -37,3 +45,11 @@ class Desk(models.Model):
 
     def get_delete_url(self):
         return reverse('desk:delete', kwargs={'pk': self.pk})
+
+    @property
+    def is_first_desk(self):
+        return not self.previous_desk and self.next_desk
+
+    @property
+    def is_last_desk(self):
+        return not self.next_desk and self.previous_desk

@@ -41,6 +41,8 @@
                                 <th>Nome</th>
                                 <th>Número</th>
                                 <th>Status</th>
+                                <th>Mesa Anterior</th>
+                                <th>Mesa Seguinte</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -50,6 +52,20 @@
                                     <td>{{ object.name }}</td>
                                     <td>{{ object.number }}</td>
                                     <td>{{ object.get_status_display }}</td>
+                                    <td>
+                                        {% if object.previous_desk %}
+                                            <a href="{{ object.previous_desk.get_absolute_url }}">{{ object.previous_desk }}</a>
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if object.next_desk %}
+                                            <a href="{{ object.next_desk.get_absolute_url }}">{{ object.next_desk }}</a>
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         <a class="btn btn-sm bg-cyan" href="{{ object.get_update_url }}">
                                         <i class="material-icons">edit</i>

@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li class="active">
-                <i class="material-icons">widgets</i> Demandas
+                <i class="material-icons">widgets</i> Pedidos
             </li>
         </ol>
     </div>
@@ -22,14 +22,14 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        <span class="text-upper">Demandas</span>
+                        <span class="text-upper">Pedidos</span>
                         <a class="btn bg-indigo btn-sm pull-right" href="{% url 'order:create' %}">
                             <i class="material-icons">add</i>
-                            <span>Adicionar Demanda</span>
+                            <span>Adicionar Pedido</span>
                         </a>
                         <small>
                             {% with object_list.count as total %}
-                                {{ total }} demanda{{ total|pluralize }} adicionado{{ total|pluralize }}.
+                                {{ total }} pedido{{ total|pluralize }} adicionado{{ total|pluralize }}.
                             {% endwith %}
                         </small>
                     </h2>
@@ -84,7 +84,7 @@
                             {% empty %}
                                 <tr>
                                     <td colspan="3">
-                                        Nenhum Demanda encontrado.
+                                        Nenhum Pedido encontrado.
                                     </td>
                                 </tr>
                             {% endfor %}

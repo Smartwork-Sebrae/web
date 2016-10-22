@@ -12,16 +12,16 @@
             </li>
             <li>
                 <a href="{% url 'order:list' %}">
-                    <i class="material-icons">widgets</i> Demandas
+                    <i class="material-icons">widgets</i> Pedidos
                 </a>
             </li>
             {% if form.instance.pk %}
                 <li class="active">
-                    Alterar Demanda "{{ object.pk }}"
+                    Alterar Pedido "{{ object.pk }}"
                 </li>
             {% else %}
                 <li class="active">
-                    Adicionar Demanda
+                    Adicionar Pedido
                 </li>
             {% endif %}
         </ol>
@@ -32,9 +32,9 @@
             <div class="card">
                 <div class="header {% if form.instance.pk %}bg-cyan{% else %}bg-indigo{% endif %}">
                     {% if form.instance.pk %}
-                        <h2 class="text-upper">Alterar Demanda "{{ object.pk }}"</h2>
+                        <h2 class="text-upper">Alterar Pedido "{{ object.pk }}"</h2>
                     {% else %}
-                        <h2 class="text-upper">Adicionar Demanda</h2>
+                        <h2 class="text-upper">Adicionar Pedido</h2>
                     {% endif %}
                     <small>You can use material design colors</small>
                 </div>

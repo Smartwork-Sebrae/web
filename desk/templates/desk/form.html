@@ -49,6 +49,22 @@
                           </div>
                         </div>
 
+                        <div class="input-group input-group-lg force-z-index">
+                            {{ form.previous_desk.label_tag }}
+
+                            <div class="form-line">
+                                {% render_field form.previous_desk|add_class:'form-control selectpicker' data-live-search='true' %}
+                            </div>
+                        </div>
+
+                        <div class="input-group input-group-lg">
+                            {{ form.next_desk.label_tag }}
+
+                            <div class="form-line">
+                                {% render_field form.next_desk|add_class:'form-control selectpicker' data-live-search='true' %}
+                            </div>
+                        </div>
+
                         <div class="input-group input-group-lg">
                           {{ form.number.label_tag }}
                           <div class="form-line">
