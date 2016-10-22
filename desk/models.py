@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
@@ -24,10 +26,10 @@ class Desk(models.Model):
 
     # relations
     previous_desk = models.OneToOneField(
-        verbose_name='Mesa Anterior',
+        verbose_name='Estação Anterior',
         to='self', null=True, blank=True, related_name='next')
     next_desk = models.OneToOneField(
-        verbose_name='Mesa Seguinte',
+        verbose_name='Estação Seguinte',
         to='self', null=True, blank=True, related_name='previous')
 
     class Meta:

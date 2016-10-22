@@ -112,6 +112,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#">
+                            <i class="material-icons">dashboard</i>
+                            <span>Painel de Visão Geral</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">multiline_chart</i>
                             <span>Pedidos</span>
@@ -150,7 +156,7 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">work</i>
-                            <span>Mesas de Trabalho</span>
+                            <span>Estações de Trabalho</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
@@ -161,6 +167,19 @@
                             <li>
                                 <a href="{% url 'desk:create' %}">
                                     <span>Adicionar</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">insert_chart</i>
+                            <span>Relatórios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{% url 'desk:list' %}">
+                                    <span>Estimativa x Realidade</span>
                                 </a>
                             </li>
                         </ul>

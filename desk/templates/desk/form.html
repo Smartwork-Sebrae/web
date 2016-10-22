@@ -12,16 +12,16 @@
             </li>
             <li>
                 <a href="{% url 'desk:list' %}">
-                    <i class="material-icons">work</i> Mesas
+                    <i class="material-icons">work</i> Estações
                 </a>
             </li>
             {% if form.instance.pk %}
                 <li class="active">
-                    Alterar Mesa "{{ object.name }}"
+                    Alterar Estação "{{ object.name }}"
                 </li>
             {% else %}
                 <li class="active">
-                    Adicionar Mesa
+                    Adicionar Estação
                 </li>
             {% endif %}
         </ol>
@@ -32,9 +32,9 @@
             <div class="card">
                 <div class="header {% if form.instance.pk %}bg-cyan{% else %}bg-indigo{% endif %}">
                     {% if form.instance.pk %}
-                        <h2 class="text-upper">Alterar Mesa "{{ object.name }}"</h2>
+                        <h2 class="text-upper">Alterar Estação "{{ object.name }}"</h2>
                     {% else %}
-                        <h2 class="text-upper">Adicionar Mesa</h2>
+                        <h2 class="text-upper">Adicionar Estação</h2>
                     {% endif %}
                     <small>You can use material design colors</small>
                 </div>
@@ -45,7 +45,7 @@
                         <div class="input-group input-group-lg">
                           {{ form.name.label_tag }}
                           <div class="form-line">
-                            {% render_field form.name|add_class:'form-control' placeholder='Ex.: Mesa de Costura' autofocus='autofocus' %}
+                            {% render_field form.name|add_class:'form-control' placeholder='Ex.: Estação de Costura' autofocus='autofocus' %}
                           </div>
                         </div>
 

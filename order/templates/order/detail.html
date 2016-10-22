@@ -8,7 +8,7 @@
                     <i class="material-icons">work</i>
                 </div>
                 <div class="content">
-                    <div class="text">MESAS</div>
+                    <div class="text">ESTAÇÕES</div>
                     <div class="number count-to" data-from="0" data-to="{{ object.order_desks.count }}" data-speed="15" data-fresh-interval="20">{{ object.order_desks.count }}</div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     <i class="material-icons">help</i>
                 </div>
                 <div class="content">
-                    <div class="text">Peças por Mesa</div>
+                    <div class="text">Peças por Estação</div>
                     <div class="number count-to" data-from="0" data-to="{{ object.get_item_per_desk }}" data-speed="1000" data-fresh-interval="20">{{ object.get_item_per_desk }}</div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 {% endwith %}
             </h4>
             <h4>
-                <small>Mesas:</small>
+                <small>Estações:</small>
                 {% with object.order_desks.count as desks %}
                     {{ desks }} mesa{{ desks|pluralize }}.
                 {% endwith %}
