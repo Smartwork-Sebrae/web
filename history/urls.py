@@ -9,4 +9,7 @@ urlpatterns = [
     url(regex=r'^history/finish/(?P<pk>\d+)/$',
         view=views.HistoryApiFinish.as_view(),
         name='api_history_finish'),
+    url(regex=r'^dashboard/$',
+        view=views.ApiDashboard.as_view(),
+        name='api_dashboard'),
 ]

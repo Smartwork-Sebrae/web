@@ -10,7 +10,7 @@ class History(models.Model):
 
     # relations
     order_desk = models.ForeignKey(
-        to='order.OrderDesk', related_name='history')
+        to='order.OrderDesk', related_name='histories')
 
     class Meta:
         verbose_name = _(u'Order Desk History')

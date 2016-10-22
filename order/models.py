@@ -62,3 +62,15 @@ class OrderDesk(models.Model):
     class Meta:
         verbose_name = _(u'Order Desk')
         verbose_name_plural = _(u'Order Desks')
+
+    @property
+    def status(self):
+        history = self.histories.last()
+        if history:
+            if history.start and not history.end:
+                return 'working'
+        return 'idle'
+
+    @property
+    def last_history(self):
+        return self.histories.last()

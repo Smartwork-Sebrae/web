@@ -58,8 +58,6 @@ class OrderUpdate(BaseOrderView, views.UpdateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-
-
 class OrderDelete(BaseOrderView, views.DeleteView):
     template_name = 'order/delete.html'
 
