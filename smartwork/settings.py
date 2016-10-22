@@ -40,12 +40,14 @@ INSTALLED_APPS = (
 
     # Installed Apps
     'widget_tweaks',
+    'rest_framework',
 
     # Project Apps
     'core',
     'item',
     'desk',
     'order',
+    'history',
 )
 
 MIDDLEWARE_CLASSES = (
