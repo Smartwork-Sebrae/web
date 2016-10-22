@@ -49,7 +49,7 @@
                         <tbody>
                             {% for object in object_list %}
                                 <tr>
-                                    <td>{{ object.item.name }}</td>
+                                    <td><a href="{{ object.get_absolute_url }}">{{ object.item.name }}</a></td>
                                     <td>
                                         {% with object.quantity as quantity %}
                                             {{ quantity }} peça{{ quantity|pluralize }}.
@@ -67,6 +67,10 @@
                                     </td>
                                     <td>{{ object.get_status_display }}</td>
                                     <td>
+                                        <a class="btn btn-sm bg-green" href="{{ object.get_absolute_url }}">
+                                        <i class="material-icons">info</i>
+                                            Informações
+                                        </a>
                                         <a class="btn btn-sm bg-cyan" href="{{ object.get_update_url }}">
                                         <i class="material-icons">edit</i>
                                             Atualizar

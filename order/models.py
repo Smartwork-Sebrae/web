@@ -45,6 +45,15 @@ class Order(models.Model):
     def get_delete_url(self):
         return reverse('order:delete', kwargs={'pk': self.pk})
 
+    def get_item_per_desk(self):
+        return self.quantity // self.order_desks.count()
+
+    def get_item_per_day(self):
+        return self.get_item_per_desk() // self.deadline
+
+    def get_left_items(self):
+        return self.quantity - (self.quantity * 0.8)
+
 
 class OrderDesk(models.Model):
     order = models.ForeignKey(to='order.Order', related_name='order_desks')

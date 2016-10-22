@@ -1,6 +1,84 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-      <blockquote>{{ object.name|linebreaks }}</blockquote>
-      <blockquote>{{ object.estimated_time|linebreaks }}</blockquote>
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-pink hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">work</i>
+                </div>
+                <div class="content">
+                    <div class="text">MESAS</div>
+                    <div class="number count-to" data-from="0" data-to="{{ object.order_desks.count }}" data-speed="15" data-fresh-interval="20">{{ object.order_desks.count }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-cyan hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">help</i>
+                </div>
+                <div class="content">
+                    <div class="text">Peças por Mesa</div>
+                    <div class="number count-to" data-from="0" data-to="{{ object.get_item_per_desk }}" data-speed="1000" data-fresh-interval="20">{{ object.get_item_per_desk }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-light-green hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">watch</i>
+                </div>
+                <div class="content">
+                    <div class="text">Peças por Dia</div>
+                    <div class="number count-to" data-from="0" data-to="{{ object.get_item_per_day }}" data-speed="1000" data-fresh-interval="20">{{ object.get_item_per_day }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-orange hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">list</i>
+                </div>
+                <div class="content">
+                    <div class="text">Peças Restantes</div>
+                    <div class="number count-to" data-from="0" data-to="{{ object.get_left_items }}" data-speed="1000" data-fresh-interval="20">{{ object.get_left_items }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">  
+        <div class="col-md-12">
+            <h4>
+                <small>Identificador:</small>
+                #{{ object.pk }}
+            </h4>
+            <h4>
+                <small>Item:</small>
+                {{ object.item.name }}
+            </h4>
+            <h4>
+                <small>Quantidade:</small>
+                {% with object.quantity as quantity %}
+                    {{ quantity }} peça{{ quantity|pluralize }}.
+                {% endwith %}
+            </h4>
+            <h4>
+                <small>Prazo:</small>
+                {% with object.deadline as deadline %}
+                    {{ deadline }} dia{{ deadline|pluralize }}.
+                {% endwith %}
+            </h4>
+            <h4>
+                <small>Mesas:</small>
+                {% with object.order_desks.count as desks %}
+                    {{ desks }} mesa{{ desks|pluralize }}.
+                {% endwith %}
+            </h4>
+            <h4>
+                <small>Status:</small>
+                {{ object.get_status_display }}
+            </h4>
+        </div>
+    </div>
 {% endblock %}
