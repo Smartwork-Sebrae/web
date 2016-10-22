@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 
+from item.forms import ItemForm
+
 from vanilla import model_views as views
 
 from item.models import Item
@@ -9,6 +11,7 @@ from item.models import Item
 
 class BaseItemView():
     model = Item
+    form_class = ItemForm
     lookup_field = 'pk'
 
 

@@ -17,7 +17,7 @@
                 <div class="body table-responsive">
                     <table class="table">
                         <thead>
-                            <tr> 
+                            <tr>
                                 <th>Nome</th>
                                 <th>Tempo esperado</th>
                             </tr>
@@ -28,8 +28,8 @@
                                 <tr>
                                     <td>{{ object.name }}</td>
                                     <td>{{ object.estimated_time }}</td>
-                                    <td><a href="#">Atualizar</a></td>
-                                    <td><a href="#">Remover</a></td>
+                                    <td><a href="{{ object.get_update_url }}">Atualizar</a></td>
+                                    <td><a href="{{ object.get_delete_url }}">Remover</a></td>
                                 </tr>
                             {% endfor %}
                         {% endif %}

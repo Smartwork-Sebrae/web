@@ -13,10 +13,10 @@ urlpatterns = [
     url(regex=r'^(?P<pk>\d+)/$',
         view=views.ItemDetail.as_view(),
         name='detail'),
-    url(regex=r'^(?P<slug>[\w-]+)/update/$',
+    url(regex=r'^(?P<pk>[\w-]+)/update/$',
         view=views.ItemUpdate.as_view(),
         name='update'),
-    url(regex=r'^(?P<slug>[\w-]+)/delete/$',
+    url(regex=r'^(?P<pk>[\w-]+)/delete/$',
         view=views.ItemDelete.as_view(),
         name='delete'),
 ]
