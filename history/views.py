@@ -7,16 +7,17 @@ from history.models import History
 
 
 class HistoryApiStart(APIView):
-    def post(self, request):
-        pk_desk = request.POST.get('pk')
-        order_desk = OrderDesk.objects.get(desk__pk=pk_desk, order__status=Order.STARTED)
+    def post(self, request, pk):
+        order_desk = OrderDesk.objects.get(
+            desk__pk=pk, order__status=Order.STARTED)
         History.objects.create(start=timezone.now(), order_desk=order_desk)
         return Response({})
 
+
 class HistoryApiFinish(APIView):
-    def post(self, request):
-        pk_desk = request.POST.get('pk')
-        order_desk = OrderDesk.objects.get(desk__pk=pk_desk, order__status=Order.STARTED)
+    def post(self, request, pk):
+        order_desk = OrderDesk.objects.get(
+            desk__pk=pk, order__status=Order.STARTED)
         history = History.objects.get(order_desk=order_desk)
         history.end = timezone.now()
         history.save()
