@@ -39,6 +39,7 @@ class ApiDashboard(APIView):
 
             dic_desk = {
                 "pk": desk.pk,
+                "desk_number": desk.desk.number,
                 "start": desk.last_history.start if desk.last_history else None,
                 "finish": desk.last_history.end if desk.last_history else None,
                 "status": desk.status,
