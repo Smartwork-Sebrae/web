@@ -1,17 +1,56 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-  <div class="row center">
-    <h3>Tem certeza que deseja remover esse item?</h3>
-  </div>
-  <div class="row">
-    <form method="POST">
-      {% csrf_token %}
-      <div class="center-align">
-        <button type="submit" class="btn-large waves-effect waves-light blue darken-4">
-          <i class="material-icons right">delete</i>
-        </button>
-      </div>
-    </form>
-  </div>
+    <div class="row clearfix">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'core:index' %}">
+                    <i class="material-icons">home</i> Início
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'item:list' %}">
+                    <i class="material-icons">widgets</i> Itens
+                </a>
+            </li>
+            <li class="active">
+                Remover Item "{{ object.name }}"
+            </li>
+        </ol>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header bg-deep-orange">
+                    <h2>
+                        <span class="text-upper">Remover Item "{{ object.name }}"</span>
+                        <small>Basic example without any additional modification classes</small>
+                    </h2>
+                </div>
+                <div class="body">
+                    <h4 class="align-center">Tem certeza que deseja remover esse item?</h4>
+
+                    <div class="align-center p-t-20 p-b-30">
+                        <span>&#8226;</span>
+                    </div>
+
+                    <form method="POST">
+                      {% csrf_token %}
+                      <div class="align-center">
+                          <a class="btn btn-lg p-l-50 p-r-50 waves-effect btn-default" href="{% url 'item:list' %}">
+                              <i class="material-icons">cancel</i>
+                              Cancelar
+                          </a>
+                          &nbsp;
+                          <button type="submit" class="btn btn-lg p-l-50 p-r-50 waves-effect bg-indigo">
+                              <i class="material-icons">check</i>
+                              Remover
+                          </button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

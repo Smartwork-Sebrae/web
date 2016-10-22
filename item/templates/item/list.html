@@ -1,44 +1,75 @@
 {% extends "core/base.html" %}
 
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
 {% block content %}
-    <div class="block-header">
-        <h2>Itens</h2>
+    <div class="row clearfix">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'core:index' %}">
+                    <i class="material-icons">home</i> Início
+                </a>
+            </li>
+            <li class="active">
+                <i class="material-icons">widgets</i> Itens
+            </li>
+        </ol>
     </div>
-    <!-- Basic Table -->
+
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        ITENS
-                        <small>Basic example without any additional modification classes</small>
+                        <span class="text-upper">Itens</span>
+                        <a class="btn bg-indigo btn-sm pull-right" href="{% url 'item:create' %}">
+                            <i class="material-icons">add</i>
+                            <span>Adicionar Item</span>
+                        </a>
+                        <small>
+                            {% with object_list.count as total %}
+                                {{ total }} item{{ total|pluralize }} adicionado{{ total|pluralize }}.
+                            {% endwith %}
+                        </small>
                     </h2>
                 </div>
                 <div class="body table-responsive">
-                    <a href="{% url 'item:create' %}">Novo Item</a>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Tempo esperado</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% if object_list %}
                             {% for object in object_list %}
                                 <tr>
                                     <td>{{ object.name }}</td>
                                     <td>{{ object.estimated_time }}</td>
-                                    <td><a href="{{ object.get_update_url }}">Atualizar</a></td>
-                                    <td><a href="{{ object.get_delete_url }}">Remover</a></td>
+                                    <td>
+                                        <a class="btn btn-sm bg-cyan" href="{{ object.get_update_url }}">
+                                        <i class="material-icons">edit</i>
+                                            Atualizar
+                                        </a>
+                                        <a class="btn btn-sm bg-deep-orange" href="{{ object.get_delete_url }}">
+                                            <i class="material-icons">delete_forever</i>
+                                            Remover
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3">
+                                        Nenhum Item encontrado.
+                                    </td>
                                 </tr>
                             {% endfor %}
-                        {% endif %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- #END# Basic Table -->
 {% endblock %}
