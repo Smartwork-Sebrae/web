@@ -1,0 +1,55 @@
+from __future__ import unicode_literals
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
+from django.db import models
+
+
+class Order(models.Model):
+    CREATED = 'created'
+    STARTED = 'started'
+    STOPED = 'stoped'
+    FINISHED = 'finished'
+    STATUS_CHOICES = (
+        (CREATED, 'Criada'),
+        (STARTED, 'Iniciada'),
+        (STOPED, 'Pausada'),
+        (FINISHED, 'Terminada'),
+    )
+    quantity = models.IntegerField(_('Quantidade'))
+    deadline = models.IntegerField(_('Prazo (dias)'))
+    status = models.CharField(
+        _('Status'), max_length=20, choices=STATUS_CHOICES,
+        default=CREATED, blank=True)
+
+    # relations
+    item = models.ForeignKey(
+        to='item.Item', related_name='orders',
+        null=True, blank=True)
+    desks = models.ManyToManyField(
+        to='desk.Desk', through='order.OrderDesk',
+        blank=True, related_name='orders')
+
+    class Meta:
+        verbose_name = _(u'Order')
+        verbose_name_plural = _(u'Orders')
+
+    def __unicode__(self):
+        return self.item.name
+
+    def get_absolute_url(self):
+        return reverse('order:detail', kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('order:update', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('order:delete', kwargs={'pk': self.pk})
+
+
+class OrderDesk(models.Model):
+    order = models.ForeignKey(to='order.Order', related_name='order_desks')
+    desk = models.ForeignKey(to='desk.Desk', related_name='order_desks')
+
+    class Meta:
+        verbose_name = _(u'Order Desk')
+        verbose_name_plural = _(u'Order Desks')

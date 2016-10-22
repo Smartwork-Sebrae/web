@@ -15,29 +15,58 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.css' %}">
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link rel="stylesheet" href="{% static 'plugins/node-waves/waves.css' %}">
+    <link href="{% static 'plugins/node-waves/waves.css' %}" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link rel="stylesheet" href="{% static 'plugins/animate-css/animate.css' %}">
+    <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
+
+    <!-- Colorpicker Css -->
+    <link href="{% static 'plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css'%}" rel="stylesheet" />
 
     <!-- Preloader Css -->
-    <link rel="stylesheet" href="{% static 'plugins/material-design-preloader/md-preloader.css' %}">
+    <link href="{% static 'plugins/material-design-preloader/md-preloader.css' %}" rel="stylesheet" />
 
     <!-- Morris Chart Css-->
-    <link rel="stylesheet" href="{% static 'plugins/morrisjs/morris.css' %}">
+    <link href="{% static 'plugins/morrisjs/morris.css' %}" rel="stylesheet" />
+
+    <!-- Dropzone Css -->
+    <link href="{% static 'plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+
+    <!-- Multi Select Css -->
+    <link href="{% static 'plugins/multi-select/css/multi-select.css' %}" rel="stylesheet">
+
+    <!-- Bootstrap Spinner Css -->
+    <link href="{% static 'plugins/jquery-spinner/css/bootstrap-spinner.css' %}" rel="stylesheet">
+
+    <!-- Bootstrap Tagsinput Css -->
+    <link href="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput.css' %}" rel="stylesheet">
+
+    <!-- Bootstrap Select Css -->
+    <link href="{% static 'plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+    <!-- noUISlider Css -->
+    <link href="{% static 'plugins/nouislider/nouislider.min.css' %}" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link rel="stylesheet" href="{% static 'css/themes/all-themes.css' %}">
+    <link href="{% static 'css/themes/all-themes.css' %}" rel="stylesheet" />
 
     <style type="text/css">
         .text-upper {
             text-transform: uppercase;
+        }
+
+        .dropdown-menu li a {
+            z-index: 1;
+        }
+
+        input.form-control {
+            z-index: 0 !important;
         }
     </style>
 </head>
@@ -89,12 +118,12 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="javascript:void(0);">
+                                <a href="{% url 'order:list' %}">
                                     <span>Listar</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);">
+                                <a href="{% url 'order:create' %}">
                                     <span>Adicionar</span>
                                 </a>
                             </li>
@@ -158,46 +187,67 @@
     </section>
 
     <!-- Jquery Core Js -->
-    <script type="text/javascript" src="{% static "plugins/jquery/jquery.min.js" %}"></script>
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 
     <!-- Bootstrap Core Js -->
-    <script type="text/javascript" src="{% static "plugins/bootstrap/js/bootstrap.js" %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
 
     <!-- Select Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/bootstrap-select/js/bootstrap-select.js" %}"></script>
+    <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/jquery-slimscroll/jquery.slimscroll.js" %}"></script>
+    <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+
+    <!-- Bootstrap Colorpicker Js -->
+    <script src="{% static 'plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js' %}"></script>
+
+    <!-- Dropzone Plugin Js -->
+    <script src="{% static 'plugins/dropzone/dropzone.js' %}"></script>
+
+    <!-- Input Mask Plugin Js -->
+    <script src="{% static 'plugins/jquery-inputmask/jquery.inputmask.bundle.js' %}"></script>
+
+    <!-- Multi Select Plugin Js -->
+    <script src="{% static 'plugins/multi-select/js/jquery.multi-select.js' %}"></script>
+
+    <!-- Jquery Spinner Plugin Js -->
+    <script src="{% static 'plugins/jquery-spinner/js/jquery.spinner.js' %}"></script>
+
+    <!-- Bootstrap Tags Input Plugin Js -->
+    <script src="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput.js' %}"></script>
+
+    <!-- noUISlider Plugin Js -->
+    <script src="{% static 'plugins/nouislider/nouislider.js' %}"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/node-waves/waves.js" %}"></script>
+    <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
 
     <!-- Jquery CountTo Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/jquery-countto/jquery.countTo.js" %}"></script>
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
 
     <!-- Morris Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/raphael/raphael.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "plugins/morrisjs/morris.js" %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
 
     <!-- ChartJs -->
-    <script type="text/javascript" src="{% static "plugins/chartjs/Chart.bundle.js" %}"></script>
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
 
     <!-- Flot Charts Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/flot-charts/jquery.flot.js" %}"></script>
-    <script type="text/javascript" src="{% static "plugins/flot-charts/jquery.flot.resize.js" %}"></script>
-    <script type="text/javascript" src="{% static "plugins/flot-charts/jquery.flot.pie.js" %}"></script>
-    <script type="text/javascript" src="{% static "plugins/flot-charts/jquery.flot.categories.js" %}"></script>
-    <script type="text/javascript" src="{% static "plugins/flot-charts/jquery.flot.time.js" %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
 
     <!-- Sparkline Chart Plugin Js -->
-    <script type="text/javascript" src="{% static "plugins/jquery-sparkline/jquery.sparkline.js" %}"></script>
+    <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
 
     <!-- Custom Js -->
-    <script type="text/javascript" src="{% static "js/admin.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/pages/index.js" %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/pages/forms/advanced-form-elements.js' %}"></script>
 
     <!-- Demo Js -->
-    <script type="text/javascript" src="{% static "js/demo.js" %}"></script>
+    <script src="{% static 'js/demo.js' %}"></script>
 </body>
 
 </html>
