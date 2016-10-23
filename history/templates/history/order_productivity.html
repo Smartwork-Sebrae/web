@@ -92,11 +92,6 @@
         }
         function reloadChart() {
             var order_id = $('#id_order').val();
-            // $('.card .body').empty();
-            // $('.card .body').append(
-            //     '<canvas id="line_chart" height="150"></canvas>'
-            // );
-            
             $.ajax({
                 method: 'GET',
                 url: '/history/api/order/' + order_id + '/productivity/'

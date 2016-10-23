@@ -27,4 +27,4 @@ angular.module('myApp', ['angularMoment'])
         var result = novo.diff(velho); // resultado da diferença de datas em milisegundos
         return moment().millisecond(result).format('hh:mm:ss'); // formatação da data
     }
-})
+});
