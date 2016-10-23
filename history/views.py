@@ -12,11 +12,15 @@ from order.models import OrderDesk, Order
 from history.models import History
 
 
+def now():
+    return timezone.localtime(timezone.now())
+
+
 class HistoryApiStart(APIView):
     def post(self, request, pk):
         order_desk = OrderDesk.objects.get(
             desk__pk=pk, order__status=Order.STARTED)
-        History.objects.create(start=timezone.now(), order_desk=order_desk)
+        History.objects.create(start=now(), order_desk=order_desk)
         return Response({})
 
 
@@ -24,8 +28,10 @@ class HistoryApiFinish(APIView):
     def post(self, request, pk):
         order_desk = OrderDesk.objects.get(
             desk__pk=pk, order__status=Order.STARTED)
-        history = History.objects.get(order_desk=order_desk)
-        history.end = timezone.now()
+        history = History.objects.filter(
+            order_desk=order_desk
+        ).last()
+        history.end = now()
         history.save()
 
         desk = Desk.objects.get(pk=pk)
