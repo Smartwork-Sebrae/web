@@ -6,7 +6,6 @@ from django.conf import settings
 
 from vanilla import TemplateView
 
-
 from desk.models import Desk
 from order.models import OrderDesk, Order
 from history.models import History
@@ -75,6 +74,7 @@ class ApiDashboard(APIView):
             "idle_desk": idle_desks,
             "desks": desk_list
         })
+
 
 class ApiOrderProductivity(APIView):
     def get(self, request, pk):

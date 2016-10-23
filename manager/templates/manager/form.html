@@ -11,17 +11,17 @@
                 </a>
             </li>
             <li>
-                <a href="{% url 'order:list' %}">
-                    <i class="material-icons">widgets</i> Pedidos
+                <a href="{% url 'manager:list' %}">
+                    <i class="material-icons">widgets</i> Gerencia de Produção
                 </a>
             </li>
             {% if form.instance.pk %}
                 <li class="active">
-                    Alterar Pedido "{{ object.pk }}"
+                    Alterar Regristro "{{ object.name }}"
                 </li>
             {% else %}
                 <li class="active">
-                    Adicionar Pedido
+                    Adicionar Item
                 </li>
             {% endif %}
         </ol>
@@ -32,51 +32,36 @@
             <div class="card">
                 <div class="header {% if form.instance.pk %}bg-cyan{% else %}bg-indigo{% endif %}">
                     {% if form.instance.pk %}
-                        <h2 class="text-upper">Alterar Pedido "{{ object.pk }}"</h2>
+                        <h2 class="text-upper">Alterar Regristro de Produção realizado às "{{ object.hour }}"</h2>
                     {% else %}
-                        <h2 class="text-upper">Adicionar Pedido</h2>
+                        <h2 class="text-upper">Adicionar Regristro de Produção</h2>
                     {% endif %}
-                    <small>You can use material design colors</small>
+                    <!--<small>You can use material design colors</small>-->
                 </div>
                 <div class="body table-responsive">
-                    {{ form.errors }}
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div class="input-group input-group-lg">
-                            {{ form.item.label_tag }}
+                          {{ form.hour.label_tag }}
+                          <div class="form-line">
+                            {% render_field form.hour|add_class:'form-control' placeholder='Ex.: 15h30' autofocus='autofocus' %}
+                          </div>
+                        </div>
+
+                        <div class="input-group input-group-lg">
+                          {{ form.produced.label_tag }}
+                          <div class="form-line">
+                            {% render_field form.produced|add_class:'form-control' placeholder='Unidades produzidas' %}
+                          </div>
+                        </div>
+
+                        <div class="input-group input-group-lg">
+                            {{ form.order.label_tag }}
 
                             <div class="form-line">
-                                {% render_field form.item|add_class:'form-control selectpicker' data-live-search='true' %}
+                                {% render_field form.order|add_class:'form-control selectpicker' data-live-search='true' %}
                             </div>
-                        </div>
-
-                        <div class="input-group input-group-lg">
-                          {{ form.quantity.label_tag }}
-                          <div class="form-line">
-                            {% render_field form.quantity|add_class:'form-control' placeholder='Quantidade de peças' %}
-                          </div>
-                        </div>
-
-                        <div class="input-group input-group-lg">
-                          {{ form.deadline.label_tag }}
-                          <div class="form-line">
-                            {% render_field form.deadline|add_class:'form-control' placeholder='Tempo em Dias' %}
-                          </div>
-                        </div>
-
-                        <div class="input-group input-group-lg">
-                          {{ form.desks.label_tag }}
-                          <div class="form-line">
-                            {% render_field form.desks|add_class:'form-control ms' placeholder='Tempo em Dias' multiple='multiple' %}
-                          </div>
-                        </div>
-
-                        <div class="input-group input-group-lg">
-                          {{ form.loss.label_tag }}
-                          <div class="form-line">
-                            {% render_field form.loss|add_class:'form-control ms' placeholder='Prejuízo' multiple='multiple' %}
-                          </div>
                         </div>
 
                         <div class="align-center p-t-10 p-b-30">
@@ -84,7 +69,7 @@
                         </div>
 
                         <div class="input-group align-center">
-                            <a class="btn btn-lg p-l-50 p-r-50 waves-effect btn-default" href="{% url 'order:list' %}">
+                            <a class="btn btn-lg p-l-50 p-r-50 waves-effect btn-default" href="{% url 'manager:list' %}">
                                 <i class="material-icons">cancel</i>
                                 Cancelar
                             </a>

@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'desk',
     'order',
     'history',
+    'manager',
 )
 
 MIDDLEWARE_CLASSES = (
