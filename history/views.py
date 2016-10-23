@@ -29,7 +29,8 @@ class ApiDashboard(APIView):
         orders = Order.objects.filter(status=Order.STARTED)
         started_desks = 0
         idle_desks = 0
-        desks = OrderDesk.objects.filter(order__pk__in=orders.values_list("pk", flat=True))
+        desks = OrderDesk.objects.filter(
+            order__pk__in=orders.values_list('pk', flat=True))
         desk_list = []
         for desk in desks:
             if desk.status == "idle":
@@ -37,13 +38,18 @@ class ApiDashboard(APIView):
             else:
                 started_desks += 1
 
+            end = start = None
+            if desk.last_history:
+                start = desk.last_history.start
+                end = desk.last_history.end
+
             dic_desk = {
                 "pk": desk.pk,
                 "desk_number": desk.desk.number,
-                "start": desk.last_history.start if desk.last_history else None,
-                "finish": desk.last_history.end if desk.last_history else None,
+                "start": start.isoformat() if start else None,
+                "finish": end.isoformat() if end else None,
                 "status": desk.status,
-                "order":  desk.order_id
+                "order": desk.order_id
             }
             desk_list.append(dic_desk)
 
