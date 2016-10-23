@@ -69,7 +69,7 @@ class ApiOrderProductivity(APIView):
         daily_goal = order.quantity / order.deadline
         daily_goals = [d * daily_goal for d in range(1, order.deadline + 1)]
 
-        db_engine = settings.get('DATABASES').get('default').get('engine')
+        db_engine = settings.DATABASES.get('default').get('ENGINE')
         extra_args = {
             'date': 'extract(day from end)'
         }
