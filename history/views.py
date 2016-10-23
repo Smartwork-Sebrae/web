@@ -66,16 +66,14 @@ class ApiDashboard(APIView):
 class ApiOrderProductivity(APIView):
     def get(self, request, pk):
         order = Order.objects.get(pk=pk)
-        daily_goal = order.quantity / order.deadline
-        daily_goals = [d * daily_goal for d in range(1, order.deadline + 1)]
 
         extra_args = {
-            'date': 'DATE(end)'
+            'date': 'history_history.end::timestamp::date'
         }
         db_engine = settings.DATABASES.get('default').get('ENGINE')
         if db_engine.endswith('sqlite3'):
             extra_args.update({
-                'date': 'date(history_history.end)'
+                'date': 'date(end)'
             })
 
         histories = History.objects.filter(
@@ -83,7 +81,7 @@ class ApiOrderProductivity(APIView):
             Q(order_desk__order=order) &
             Q(order_desk__desk__next_desk__isnull=True) &
             Q(order_desk__desk__previous_desk__isnull=False)
-        ).extra(select=extra_args).values('date').annotate(total=Count('id'))
+        ).values('date').annotate(total=Count('id'))
 
         def accumulate_total(histories):
             total = 0
@@ -99,5 +97,4 @@ class ApiOrderProductivity(APIView):
             'histories': accumulate_total(
                 [history.get('total') for history in histories]
             ),
-            'daily_goals': daily_goals,
         })
