@@ -18,16 +18,18 @@ def now():
 
 class HistoryApiStart(APIView):
     def post(self, request, pk):
-        order_desk = OrderDesk.objects.get(
-            desk__pk=pk, order__status=Order.STARTED)
+        order_desk = OrderDesk.objects.filter(
+            desk__pk=pk, order__status=Order.STARTED
+        ).last()
         History.objects.create(start=now(), order_desk=order_desk)
         return Response({})
 
 
 class HistoryApiFinish(APIView):
     def post(self, request, pk):
-        order_desk = OrderDesk.objects.get(
-            desk__pk=pk, order__status=Order.STARTED)
+        order_desk = OrderDesk.objects.filter(
+            desk__pk=pk, order__status=Order.STARTED
+        ).last()
         history = History.objects.filter(
             order_desk=order_desk
         ).last()
