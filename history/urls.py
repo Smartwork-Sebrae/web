@@ -12,4 +12,7 @@ urlpatterns = [
     url(regex=r'^dashboard/$',
         view=views.ApiDashboard.as_view(),
         name='api_dashboard'),
+    url(regex=r'^history/order/(?P<pk>\d+)/productivity/$',
+        view=views.ApiOrderProductivity.as_view(),
+        name='api_history_order_productivity'),
 ]
