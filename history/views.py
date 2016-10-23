@@ -108,3 +108,10 @@ class DashboardView(TemplateView):
 
 class OrderProductivityView(TemplateView):
     template_name = 'history/order_productivity.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderProductivityView, self).get_context_data(**kwargs)
+        context.update(
+            orders=Order.objects.all()
+        )
+        return context
