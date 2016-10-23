@@ -71,7 +71,7 @@
     </style>
 </head>
 
-<body class="theme-indigo">
+<body class="theme-indigo" {% block ngapp %}{% endblock ngapp %}>
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -112,7 +112,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{% url 'history:dashboard' %}">
                             <i class="material-icons">dashboard</i>
                             <span>Painel de Visão Geral</span>
                         </a>
@@ -171,6 +171,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">show_chart</i>
+                            <span>Relatórios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{% url 'history:history_order_productivity' %}">
+                                    <span>Produtividade do Pedido</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!-- #Menu -->
@@ -186,7 +199,7 @@
     </section>
 
     <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid" {% block ngcontroller %}{% endblock ngcontroller %}>
             {% block content %}
             {% endblock %}
         </div>
@@ -222,8 +235,9 @@
     <!-- Bootstrap Tags Input Plugin Js -->
     <script src="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput.js' %}"></script>
 
-    <!-- noUISlider Plugin Js -->
+    <!-- noUISlider Plugin Js
     <script src="{% static 'plugins/nouislider/nouislider.js' %}"></script>
+    -->
 
     <!-- Waves Effect Plugin Js -->
     <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
@@ -254,6 +268,8 @@
 
     <!-- Demo Js -->
     <script src="{% static 'js/demo.js' %}"></script>
+
+    {% block extra_js %}{% endblock extra_js %}
 </body>
 
 </html>

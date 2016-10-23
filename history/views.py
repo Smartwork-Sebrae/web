@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.conf import settings
 
+from vanilla import TemplateView
+
 from order.models import OrderDesk, Order
 from history.models import History
 
@@ -98,3 +100,11 @@ class ApiOrderProductivity(APIView):
                 [history.get('total') for history in histories]
             ),
         })
+
+
+class DashboardView(TemplateView):
+    template_name = 'history/dashboard.html'
+
+
+class OrderProductivityView(TemplateView):
+    template_name = 'history/order_productivity.html'
