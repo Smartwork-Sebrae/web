@@ -33,14 +33,17 @@ class ApiDashboard(APIView):
         orders = Order.objects.filter(status=Order.STARTED)
         started_desks = 0
         idle_desks = 0
+        inactive_desks = 0
         desks = OrderDesk.objects.filter(
             order__pk__in=orders.values_list('pk', flat=True))
         desk_list = []
         for desk in desks:
+            if desk.status == "working":
+                started_desks += 1
             if desk.status == "idle":
                 idle_desks += 1
             else:
-                started_desks += 1
+                inactive_desks += 1
 
             end = start = None
             if desk.last_history:
@@ -53,14 +56,20 @@ class ApiDashboard(APIView):
                 "start": start.isoformat() if start else None,
                 "finish": end.isoformat() if end else None,
                 "status": desk.status,
+                "formatted_status": desk.get_status_display,
                 "order": desk.order_id
             }
             desk_list.append(dic_desk)
 
         return Response({
             "order_count": orders.count(),
+            "total_left": 1200 - 160,
             "started_desk": started_desks,
             "idle_desk": idle_desks,
+            "inactive_desk": inactive_desks,
+            "total_desk": (
+                started_desks + idle_desks + inactive_desks
+            ),
             "desks": desk_list
         })
 

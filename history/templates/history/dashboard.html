@@ -11,36 +11,71 @@
             <h2>Painel de Visão Geral</h2>
         </div>
         <div class="row clearfix">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box-3 bg-indigo">
+            <div class="col-sm-2 col-xs-12">
+                <div class="info-box bg-indigo">
                     <div class="icon">
                         <i class="material-icons">multiline_chart</i>
                     </div>
                     <div class="content">
-                        <div class="text text-upper">Pedidos Ativos</div>
+                        <div class="text text-upper">Pedidos</div>
                         <div class="number">{{ retorno.order_count }}</div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box-3 bg-blue">
+            <div class="col-sm-2 col-xs-12">
+                <div class="info-box bg-teal">
+                    <div class="icon">
+                        <i class="material-icons">show_chart</i>
+                    </div>
+                    <div class="content">
+                        <div class="text text-upper">Restando</div>
+                        <div class="number">
+                            {{ retorno.total_left }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 col-xs-12">
+                <div class="info-box bg-blue">
                     <div class="icon">
                         <i class="material-icons">work</i>
                     </div>
                     <div class="content">
-                        <div class="text text-upper">Total de estações</div>
-                        <div class="number ">{{ retorno.started_desk + retorno.idle_desk }}</div>
+                        <div class="text text-upper">Mesas</div>
+                        <div class="number ">{{ retorno.total_desk }}</div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="info-box-3 bg-cyan">
+            <div class="col-sm-2 col-xs-4">
+                <div class="info-box bg-light-green">
                     <div class="icon">
-                        <i class="material-icons">power_settings_new</i>
+                        <i class="material-icons">alarm_on</i>
                     </div>
                     <div class="content">
-                        <div class="text text-upper">Mesas Inativas </div>
+                        <div class="text text-upper">Ativas</div>
+                        <div class="number">{{ retorno.started_desk }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 col-xs-4">
+                <div class="info-box bg-orange">
+                    <div class="icon">
+                        <i class="material-icons">alarm_off</i>
+                    </div>
+                    <div class="content">
+                        <div class="text text-upper">Ociosas</div>
                         <div class="number ">{{ retorno.idle_desk }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 col-xs-4">
+                <div class="info-box bg-grey">
+                    <div class="icon">
+                        <i class="material-icons">timer_off</i>
+                    </div>
+                    <div class="content">
+                        <div class="text text-upper">Inativas</div>
+                        <div class="number ">{{ retorno.inactive_desk }}</div>
                     </div>
                 </div>
             </div>
@@ -56,10 +91,30 @@
                     </div>
                     <div class="content">
                         <div class="text text-upper">
-                            #{{ desk.order }} &#8226; Mesa {{ desk.desk_number }}
+                            Mesa {{ desk.desk_number }}
+                            &#8226;
+                            Pedido #{{ desk.order }}
                         </div>
+                        <span class="light">Status: {{ desk.formatted_status }}</span>
                         <div class="number">
                             {{ desk.start | date:'HH:mm:ss' }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box-3 bg-grey" ng-if="desk.status == 'inactive'">
+                    <div class="icon">
+                        <i class="material-icons">timer_off</i>
+                    </div>
+                    <div class="content">
+                        <div class="text text-upper">
+                            Mesa {{ desk.desk_number }}
+                            &#8226;
+                            Pedido #{{ desk.order }}
+                        </div>
+                        <span class="light">Status: {{ desk.formatted_status }}</span>
+                        <div class="number">
+                            -- : -- : --
                         </div>
                     </div>
                 </div>
@@ -70,9 +125,12 @@
                     </div>  
                     <div class="content">
                         <div class="text text-upper">
-                            #{{ desk.order }} &#8226; Mesa {{ desk.desk_number }}
+                            Mesa {{ desk.desk_number }}
+                            &#8226;
+                            Pedido #{{ desk.order }}
                         </div>
-                        <div class="number">
+                        <span class="light">Status: {{ desk.formatted_status }}</span>
+                        <div class="number" ng-if="desk.finish">
                             {{ desk.finish | date:'HH:mm:ss' }}
                         </div>
                     </div>
