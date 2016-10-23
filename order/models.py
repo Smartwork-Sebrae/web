@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
@@ -27,7 +29,8 @@ class Order(models.Model):
         null=True, blank=True)
     desks = models.ManyToManyField(
         to='desk.Desk', through='order.OrderDesk',
-        blank=True, related_name='orders')
+        blank=True, related_name='orders',
+        verbose_name='Estações de Trabalho')
 
     class Meta:
         verbose_name = _(u'Order')
