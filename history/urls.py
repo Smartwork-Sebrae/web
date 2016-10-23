@@ -12,4 +12,7 @@ urlpatterns = [
     url(regex=r'^dashboard/$',
         view=views.ApiDashboard.as_view(),
         name='api_dashboard'),
+    url(regex=r'^relatory/results_achieved/(?P<value>\d+)/$',
+        view=views.RelatoryApiResultsAchieved.as_view(),
+        name='api_results_achieved')
 ]

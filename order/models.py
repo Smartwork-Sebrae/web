@@ -21,6 +21,8 @@ class Order(models.Model):
         _('Status'), max_length=20, choices=STATUS_CHOICES,
         default=CREATED, blank=True)
 
+    items_produced = models.IntegerField(null=True, blank=True)
+
     # relations
     item = models.ForeignKey(
         to='item.Item', related_name='orders',
@@ -53,6 +55,10 @@ class Order(models.Model):
 
     def get_left_items(self):
         return self.quantity - (self.quantity * 0.8)
+
+    def get_results_achieved(self):
+        percentage = (self.items_produced * 100) // self.quantity
+        return percentage
 
 
 class OrderDesk(models.Model):

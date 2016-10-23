@@ -1,7 +1,10 @@
+from django.db.models import Count
 from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+
+from desk.models import Desk
 from order.models import OrderDesk, Order
 from history.models import History
 
@@ -21,6 +24,16 @@ class HistoryApiFinish(APIView):
         history = History.objects.get(order_desk=order_desk)
         history.end = timezone.now()
         history.save()
+
+        desk = Desk.objects.get(pk=pk)
+        if desk.is_last_desk:
+            order = Order.objects.get(pk=order_desk.order.pk)
+            if order.items_produced:
+                order.items_produced += 1
+            else:
+                order.items_produced = 0
+            order.save()
+
         return Response({})
 
 
@@ -52,4 +65,17 @@ class ApiDashboard(APIView):
             "started_desk": started_desks,
             "idle_desk": idle_desks,
             "desks": desk_list
+        })
+
+
+class RelatoryApiResultsAchieved(APIView):
+    def get(self, request, value):
+        order = Order.objects.get(pk=value)
+        items = order.items_produced
+        qs = History.objects.filter(History .notNull()).extra(select={'day': 'date( end )'}).values('day') \
+            .annotate(available=Count('end'))
+
+        return Response(
+        {
+            "results": qs
         })
