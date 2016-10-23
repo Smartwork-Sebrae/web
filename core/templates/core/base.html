@@ -68,6 +68,10 @@
         input.form-control {
             z-index: 0 !important;
         }
+
+        .info-box-3 {
+            height: 95px;
+        }
     </style>
 </head>
 
@@ -93,7 +97,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="{% url 'core:index' %}">Smartwork</a>
+                <a class="navbar-brand" href="{% url 'core:dashboard' %}">Smartwork</a>
             </div>
         </div>
     </nav>
@@ -105,12 +109,6 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">Menu de Navegação</li>
-                    <li class="active">
-                        <a href="{% url 'core:index' %}">
-                            <i class="material-icons">home</i>
-                            <span>Início</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="{% url 'history:dashboard' %}">
                             <i class="material-icons">dashboard</i>

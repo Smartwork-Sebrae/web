@@ -21,7 +21,7 @@ class Order(models.Model):
     deadline = models.IntegerField(_('Prazo (dias)'))
     status = models.CharField(
         _('Status'), max_length=20, choices=STATUS_CHOICES,
-        default=CREATED, blank=True)
+        default=STARTED, blank=True)
 
     loss = models.IntegerField(_('Prejuízo'), null=True)
     items_produced = models.IntegerField(null=True, blank=True)
@@ -75,11 +75,28 @@ class OrderDesk(models.Model):
 
     @property
     def status(self):
-        history = self.histories.last()
-        if history:
-            if history.start and not history.end:
-                return 'working'
+        history = self.last_history
+        if not history:
+            return 'inactive'
+        elif history.start and not history.end:
+            return 'working'
         return 'idle'
+
+    @property
+    def get_status_display(self):
+        return {
+            'inactive': 'Inativa',
+            'working': 'Em Atividade',
+            'idle': 'Ociosa',
+        }.get(self.status)
+        # history = self.last_history
+        # if not history:
+        #     return 'Inativa'
+
+        # if history.start and not history.end:
+        #     return 'Em atividade'
+        # else:
+        #     return 'Ocioso'
 
     @property
     def last_history(self):

@@ -1,9 +1,9 @@
 from django.conf.urls import url
 
-from core import views
+from history import views
 
 urlpatterns = [
     url(regex=r'^$',
-        view=views.IndexView.as_view(),
-        name='index'),
+        view=views.DashboardView.as_view(),
+        name='dashboard'),
 ]
