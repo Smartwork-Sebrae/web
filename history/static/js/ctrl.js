@@ -4,7 +4,7 @@ angular.module('myApp', ['angularMoment'])
     function startTime(){
         $http({
             method: 'GET',
-            url: '/api/dashboard/'
+            url: '/history/api/dashboard/'
         }).
         then(function successCallback(response) {
             $scope.retorno = response.data;
@@ -15,7 +15,7 @@ angular.module('myApp', ['angularMoment'])
                     response.data.desks[i].finish = diferenciarDatas(response.data.desks[i].finish);
                 }
             }
-            $scope.orders = response.data.desks;
+            $scope.desks = response.data.desks;
         });
         var t = setTimeout(function(){ startTime() }, 200);
     }
@@ -25,7 +25,7 @@ angular.module('myApp', ['angularMoment'])
         var velho = moment(data); //data do obj recebido
         var novo = moment(); // data do obj atual
         var result = novo.diff(velho); // resultado da diferença de datas em milisegundos
-        return moment().millisecond(result).format('h:mm:ss'); // formatação da data
+        return moment().millisecond(result).format('hh:mm:ss'); // formatação da data
     }
 })
 
@@ -33,7 +33,7 @@ angular.module('myApp', ['angularMoment'])
 .controller('CtrlResultados', function ($scope, $http) {
     $http({
         method: 'GET',
-        url: '/api/history/order/1/productivity/'
+        url: '/history/api/order/1/productivity/'
     }).
     then(function successCallback(response) { 
         result= response.data;

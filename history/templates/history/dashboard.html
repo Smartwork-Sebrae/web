@@ -49,30 +49,30 @@
 
         <!-- TESTE -->
         <div class="row clearfix">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-repeat="order in orders">
-                <div class="info-box-3 bg-light-green" ng-if="order.status == 'working'">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-repeat="desk in desks">
+                <div class="info-box-3 bg-light-green" ng-if="desk.status == 'working'">
                     <div class="icon">
                         <i class="material-icons">alarm_on</i>
                     </div>
                     <div class="content">
                         <div class="text text-upper">
-                            #{{ order.order }} &#8226; Mesa #{{ order.desk_number }}
+                            #{{ desk.order }} &#8226; Mesa {{ desk.desk_number }}
                         </div>
                         <div class="number">
-                            {{ order.start | date:'HH:mm:ss' }}
+                            {{ desk.start | date:'HH:mm:ss' }}
                         </div>
                     </div>
                 </div>
 
-                <div class="info-box-3 bg-orange" ng-if="order.status == 'idle'">
+                <div class="info-box-3 bg-orange" ng-if="desk.status == 'idle'">
                     <div class="icon">
                         <i class="material-icons">alarm_off</i>
                     </div>  
                     <div class="content">
                         <div class="text text-upper">
-                            #{{ order.order }} &#8226; Mesa #{{ order.desk_number }}
+                            #{{ desk.order }} &#8226; Mesa {{ desk.desk_number }}
                         </div>
-                        <div class="number">{{ order.finish | date:'HH:mm:ss' }}</div>
+                        <div class="number">{{ desk.finish | date:'HH:mm:ss' }}</div>
                     </div>
                 </div>
             </div>
