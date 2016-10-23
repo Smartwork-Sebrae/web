@@ -95,9 +95,8 @@
                             &#8226;
                             Pedido #{{ desk.order }}
                         </div>
-                        <span class="light">Status: {{ desk.formatted_status }}</span>
                         <div class="number">
-                            {{ desk.start | date:'HH:mm:ss' }}
+                            {{ desk.formatted_status }}
                         </div>
                     </div>
                 </div>
@@ -112,9 +111,8 @@
                             &#8226;
                             Pedido #{{ desk.order }}
                         </div>
-                        <span class="light">Status: {{ desk.formatted_status }}</span>
                         <div class="number">
-                            -- : -- : --
+                            {{ desk.formatted_status }}
                         </div>
                     </div>
                 </div>
@@ -129,9 +127,8 @@
                             &#8226;
                             Pedido #{{ desk.order }}
                         </div>
-                        <span class="light">Status: {{ desk.formatted_status }}</span>
-                        <div class="number" ng-if="desk.finish">
-                            {{ desk.finish | date:'HH:mm:ss' }}
+                        <div class="number">
+                            {{ desk.formatted_status }}
                         </div>
                     </div>
                 </div>
