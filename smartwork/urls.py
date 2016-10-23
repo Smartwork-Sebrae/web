@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^orders/', include('order.urls', namespace='order')),
     url(r'^items/', include('item.urls', namespace='item')),
     url(r'^desks/', include('desk.urls', namespace='desk')),
-    url(r'^api/', include('history.urls', namespace='history')),
+    url(r'^history/', include('history.urls', namespace='history')),
 ]

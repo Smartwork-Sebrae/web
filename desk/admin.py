@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from desk.models import Desk
+
+
+class DeskAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Desk, DeskAdmin)

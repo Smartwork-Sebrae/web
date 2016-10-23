@@ -1,7 +1,10 @@
-from django.db.models import Count
+from django.db.models import Q, Count
 from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.conf import settings
+
+from vanilla import TemplateView
 
 
 from desk.models import Desk
@@ -42,7 +45,8 @@ class ApiDashboard(APIView):
         orders = Order.objects.filter(status=Order.STARTED)
         started_desks = 0
         idle_desks = 0
-        desks = OrderDesk.objects.filter(order__pk__in=orders.values_list("pk", flat=True))
+        desks = OrderDesk.objects.filter(
+            order__pk__in=orders.values_list('pk', flat=True))
         desk_list = []
         for desk in desks:
             if desk.status == "idle":
@@ -50,13 +54,18 @@ class ApiDashboard(APIView):
             else:
                 started_desks += 1
 
+            end = start = None
+            if desk.last_history:
+                start = desk.last_history.start
+                end = desk.last_history.end
+
             dic_desk = {
                 "pk": desk.pk,
                 "desk_number": desk.desk.number,
-                "start": desk.last_history.start if desk.last_history else None,
-                "finish": desk.last_history.end if desk.last_history else None,
+                "start": start.isoformat() if start else None,
+                "finish": end.isoformat() if end else None,
                 "status": desk.status,
-                "order":  desk.order_id
+                "order": desk.order_id
             }
             desk_list.append(dic_desk)
 
@@ -67,15 +76,53 @@ class ApiDashboard(APIView):
             "desks": desk_list
         })
 
+class ApiOrderProductivity(APIView):
+    def get(self, request, pk):
+        order = Order.objects.get(pk=pk)
 
-class RelatoryApiResultsAchieved(APIView):
-    def get(self, request, value):
-        order = Order.objects.get(pk=value)
-        items = order.items_produced
-        qs = History.objects.filter(History .notNull()).extra(select={'day': 'date( end )'}).values('day') \
-            .annotate(available=Count('end'))
+        extra_args = {
+            'date': 'history_history.end::timestamp::date'
+        }
+        db_engine = settings.DATABASES.get('default').get('ENGINE')
+        if db_engine.endswith('sqlite3'):
+            extra_args.update({
+                'date': 'date(end)'
+            })
 
-        return Response(
-        {
-            "results": qs
+        histories = History.objects.filter(
+            Q(end__isnull=False) &
+            Q(order_desk__order=order) &
+            Q(order_desk__desk__next_desk__isnull=True) &
+            Q(order_desk__desk__previous_desk__isnull=False)
+        ).extra(select=extra_args).values('date').annotate(total=Count('id'))
+
+        def accumulate_total(histories):
+            total = 0
+            for x in histories:
+                total += x
+                yield total
+
+        return Response({
+            'pk': order.pk,
+            'item': order.item.name,
+            'deadline': order.deadline,
+            'quantity': order.quantity,
+            'histories': accumulate_total(
+                [history.get('total') for history in histories]
+            ),
         })
+
+
+class DashboardView(TemplateView):
+    template_name = 'history/dashboard.html'
+
+
+class OrderProductivityView(TemplateView):
+    template_name = 'history/order_productivity.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderProductivityView, self).get_context_data(**kwargs)
+        context.update(
+            orders=Order.objects.all()
+        )
+        return context
