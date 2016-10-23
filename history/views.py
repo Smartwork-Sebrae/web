@@ -75,7 +75,7 @@ class ApiOrderProductivity(APIView):
         db_engine = settings.DATABASES.get('default').get('ENGINE')
         if db_engine.endswith('sqlite3'):
             extra_args.update({
-                'date': 'date(end)'
+                'date': 'date(history_history.end)'
             })
 
         histories = History.objects.filter(
@@ -94,6 +94,8 @@ class ApiOrderProductivity(APIView):
         return Response({
             'pk': order.pk,
             'item': order.item.name,
+            'deadline': order.deadline,
+            'quantity': order.quantity,
             'histories': accumulate_total(
                 [history.get('total') for history in histories]
             ),
