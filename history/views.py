@@ -71,7 +71,7 @@ class ApiOrderProductivity(APIView):
 
         db_engine = settings.DATABASES.get('default').get('ENGINE')
         extra_args = {
-            'date': 'extract (day from end)'
+            'date': 'DATE(end)'
         }
         if db_engine.endswith('sqlite3'):
             extra_args.update({
