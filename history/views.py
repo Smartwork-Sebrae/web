@@ -2,6 +2,7 @@ from django.db.models import Q, Count
 from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.conf import settings
 
 from order.models import OrderDesk, Order
 from history.models import History
@@ -66,15 +67,23 @@ class ApiOrderProductivity(APIView):
     def get(self, request, pk):
         order = Order.objects.get(pk=pk)
         daily_goal = order.quantity / order.deadline
-        expected = [d * daily_goal for d in range(1, order.deadline + 1)]
+        daily_goals = [d * daily_goal for d in range(1, order.deadline + 1)]
+
+        db_engine = settings.get('DATABASES').get('default').get('engine')
+        extra_args = {
+            'date': 'extract(day from end)'
+        }
+        if db_engine.endswith('sqlite3'):
+            extra_args.update({
+                'date': 'date(end)'
+            })
+
         histories = History.objects.filter(
             Q(end__isnull=False) &
             Q(order_desk__order=order) &
             Q(order_desk__desk__next_desk__isnull=True) &
             Q(order_desk__desk__previous_desk__isnull=False)
-        ).extra({
-            'date': 'date(end)'
-        }).values('date').annotate(total=Count('id'))
+        ).extra(extra_args).values('date').annotate(total=Count('id'))
 
         def accumulate_total(histories):
             total = 0
@@ -88,5 +97,5 @@ class ApiOrderProductivity(APIView):
             'histories': accumulate_total(
                 [history.get('total') for history in histories]
             ),
-            'expected': expected,
+            'daily_goals': daily_goals,
         })
