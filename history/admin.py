@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from history.models import History
+
+
+class HistoryAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(History, HistoryAdmin)
