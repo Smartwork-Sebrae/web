@@ -6,7 +6,7 @@ from django.db import models
 
 
 class Manager(models.Model):
-    hour = models.CharField(_('Hora'), max_length = 10)
+    hour = models.CharField(_('Hora'), max_length=10)
     produced = models.IntegerField(_('Peças produzidas'))
 
     # relations
