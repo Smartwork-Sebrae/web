@@ -6,6 +6,8 @@ from django.conf import settings
 
 from vanilla import TemplateView
 
+
+from desk.models import Desk
 from order.models import OrderDesk, Order
 from history.models import History
 
@@ -25,6 +27,16 @@ class HistoryApiFinish(APIView):
         history = History.objects.get(order_desk=order_desk)
         history.end = timezone.now()
         history.save()
+
+        desk = Desk.objects.get(pk=pk)
+        if desk.is_last_desk:
+            order = Order.objects.get(pk=order_desk.order.pk)
+            if order.items_produced:
+                order.items_produced += 1
+            else:
+                order.items_produced = 0
+            order.save()
+
         return Response({})
 
 
@@ -72,7 +84,6 @@ class ApiDashboard(APIView):
             ),
             "desks": desk_list
         })
-
 
 class ApiOrderProductivity(APIView):
     def get(self, request, pk):
