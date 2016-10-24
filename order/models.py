@@ -23,6 +23,7 @@ class Order(models.Model):
         _('Status'), max_length=20, choices=STATUS_CHOICES,
         default=STARTED, blank=True)
 
+    loss = models.IntegerField(_('Prejuízo'), null=True, blank=True)
     items_produced = models.IntegerField(null=True, blank=True)
 
     # relations

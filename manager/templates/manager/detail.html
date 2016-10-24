@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <h4>
+                <small>Hora:</small>
+                {{ object.hour|time:"H:i"|linebreaks }}
+            </h4>
+            <h4>
+                <small>Itens produzidos:</small>
+                {{ object.produced|linebreaks }}
+            </h4>
+            <h4>
+                <small>Pedido:</small>
+                {{ object.order|linebreaks }}
+            </h4>
+        </div>
+    </div>
+{% endblock %}

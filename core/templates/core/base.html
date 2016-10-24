@@ -171,6 +171,24 @@
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">supervisor_account</i>
+                            <span>Gerencia de Produção</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{% url 'manager:list' %}">
+                                    <span>Listar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'manager:create' %}">
+                                    <span>Adicionar</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">show_chart</i>
                             <span>Relatórios</span>
                         </a>

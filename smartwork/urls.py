@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^items/', include('item.urls', namespace='item')),
     url(r'^desks/', include('desk.urls', namespace='desk')),
     url(r'^history/', include('history.urls', namespace='history')),
+    url(r'^manager/', include('manager.urls', namespace='manager')),
 ]
