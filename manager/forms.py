@@ -5,5 +5,8 @@ from manager.models import Manager
 
 class ManagerForm(forms.ModelForm):
     class Meta:
-        fields = '__all__'
+        fields = ('hour', 'produced', 'order')
+        widgets = {
+            'hour': forms.TimeInput(format='%H:%M'),
+        }
         model = Manager
